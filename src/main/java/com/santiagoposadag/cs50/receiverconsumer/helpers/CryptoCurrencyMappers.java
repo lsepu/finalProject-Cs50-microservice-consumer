@@ -3,9 +3,11 @@ package com.santiagoposadag.cs50.receiverconsumer.helpers;
 import com.santiagoposadag.cs50.receiverconsumer.collections.BoughtCryptoCurrency;
 import com.santiagoposadag.cs50.receiverconsumer.collections.CryptoCurrency;
 import com.santiagoposadag.cs50.receiverconsumer.collections.SoldCryptoCurrency;
+import com.santiagoposadag.cs50.receiverconsumer.collections.User;
 import com.santiagoposadag.cs50.receiverconsumer.dto.BoughtCryptoCurrencyDto;
 import com.santiagoposadag.cs50.receiverconsumer.dto.CryptoCurrencyDto;
 import com.santiagoposadag.cs50.receiverconsumer.dto.SoldCryptoCurrencyDto;
+import com.santiagoposadag.cs50.receiverconsumer.dto.UserDto;
 import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
@@ -100,6 +102,27 @@ public class CryptoCurrencyMappers {
             soldCryptoCurrency.setUserId(crypto.getUserId());
             soldCryptoCurrency.setRoutingKey(crypto.getRoutingKey());
             return soldCryptoCurrency;
+        };
+    }
+
+    public Function<UserDto, User> fromUserDtoToEntity(){
+        return user->{
+            var userEntity = new User();
+            userEntity.setId(user.getId());
+            userEntity.setName(user.getName());
+            userEntity.setRoutingKey(user.getRoutingKey());
+            return  userEntity;
+        };
+
+    }
+
+    public Function<User, UserDto> fromUserEntityToDto(){
+        return dto -> {
+            var userDto = new UserDto();
+            userDto.setId(dto.getId());
+            userDto.setName(dto.getName());
+            userDto.setRoutingKey(dto.getRoutingKey());
+            return userDto;
         };
     }
 }
